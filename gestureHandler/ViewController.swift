@@ -17,12 +17,30 @@ class ViewController: UIViewController {
         swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
         view.addGestureRecognizer(swipeLeft)
 
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(swiped))
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+        view.addGestureRecognizer(swipeRight)
     }
     
     @objc func swiped(gesture: UISwipeGestureRecognizer){
         let swipeGesture = gesture as UISwipeGestureRecognizer
-        if swipeGesture.direction == UISwipeGestureRecognizer.Direction.left{
+        switch swipeGesture.direction{
+        case UISwipeGestureRecognizer.Direction.left:
             print("Left Swiped")
+        case UISwipeGestureRecognizer.Direction.right:
+            print("Right Swiped")
+        default:
+            break
+        }
+//        if swipeGesture.direction == UISwipeGestureRecognizer.Direction.left{
+//            print("Left Swiped")
+//        }
+    }
+    
+    // Shake Gesture
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if event?.subtype == UIEvent.EventSubtype.motionShake{
+            print("Phone is shaking")
         }
     }
 
